@@ -1,0 +1,66 @@
+site_name: Gmvrh
+site_url: https://gmrvh.github.io/ctf-writeups
+site_author: Gmrvh
+repo_url: https://github.com/gmrvh/ctf-writeups
+
+theme:
+  name: material
+  palette:
+    # White text on black background
+    scheme: slate
+    primary: black
+    accent: white
+  features:
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+    - content.code.copy
+
+# For terminal-like look and feel
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed
+  - attr_list
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+nav:
+  - Home: index.md
+  - CTF Writeups:
+      - Overview: web/index.md
+      - HackTheBox:
+          - Cypher: htb/cypher.md
+          - Eureka: htb/eureka.md
+          - Monteverde: htb/monteverde.md
+          - Sauna: htb/sauna.md
+          - Timelapse: htb/timelapse.md
+          - Forest: htb/forest.md
+          - Cascade: htb/cascade.md
+          - Blackfield: htb/blackfield.md
+          - Soccer: htb/soccer.md
+          - Jeeves: htb/jeeves.md
+
+      - ProvingGrounds:
+          - DVR4: pg/dvr4.md
+          - Shenzi: pg/shenzi.md
+          - Nora: pg/nora.md
+          - Catto: pg/catto.md
+          - Bottleup: pg/bottleup.md
+          - Resourced: pg/resourced.md
+          - Confusion: pg/confusion.md
+          - Clue: pg/clue.md
+          - Flu: pg/flu.md
+          - Zipper: pg/zipper.md
+          - ZenPhoto: pg/zenphoto.md
+          

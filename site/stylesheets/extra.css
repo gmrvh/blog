@@ -1,0 +1,314 @@
+﻿:root {
+  --md-primary-fg-color: #000000;
+  --md-primary-fg-color--light: #000000;
+  --md-primary-fg-color--dark: #000000;
+  --md-accent-fg-color: #ffffff;
+  
+  --terminal-green: #00ff00;
+  --terminal-green-dim: #00cc00;
+  --terminal-green-bright: #60ff60;
+  --terminal-green-dark: #008800;
+  --terminal-green-subtle: rgba(0, 255, 0, 0.15);
+}
+
+body {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+  background-color: #000000;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.md-header {
+  display: none !important;
+}
+
+.md-footer {
+  display: none !important;
+}
+
+.md-main {
+  height: 100vh;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.md-main__inner {
+  height: 100%;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.md-content {
+  height: 100%;
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}
+
+.md-content__inner {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.md-sidebar {
+  top: 0;
+  height: 100vh;
+}
+
+.md-sidebar__scrollwrap {
+  height: 100vh;
+}
+
+.md-nav {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+
+.md-nav--primary > .md-nav__title {
+  height: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+
+.md-nav--primary > .md-nav__title .md-nav__button {
+  display: none;
+}
+
+
+.md-nav--primary .md-nav__list {
+  margin-top: 0.5rem;
+}
+
+
+
+
+.md-nav__toggle {
+  opacity: 0;
+  position: absolute;
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav {
+  display: block !important; 
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav {
+  display: block; 
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__toggle:not(:checked) ~ .md-nav {
+  display: none;
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav {
+  display: none; 
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__toggle:checked ~ .md-nav {
+  display: block;
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__link {
+  position: relative;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__link:after {
+  content: "▼";
+  font-size: 0.6em;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--terminal-green-dim);
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__toggle:not(:checked) ~ .md-nav__link:after {
+  content: "▶";
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__link {
+  position: relative;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__link:after {
+  content: "▶";
+  font-size: 0.6em;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--terminal-green-dim);
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__toggle:checked ~ .md-nav__link:after {
+  content: "▼";
+}
+
+
+.md-typeset a {
+  color: var(--terminal-green);
+}
+
+.md-typeset a:hover {
+  color: var(--terminal-green-bright);
+}
+
+
+.md-nav__link--active,
+.md-nav__link--active:focus,
+.md-nav__link--active:hover {
+  color: var(--terminal-green-bright) !important; 
+  font-weight: bold;
+}
+
+code {
+  background-color: #222222;
+  color: var(--terminal-green);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Consolas', monospace;
+}
+
+pre {
+  background-color: #222222;
+}
+
+
+.md-typeset h1 {
+  color: #ffffff; 
+  border-bottom: 1px solid var(--terminal-green-dark);
+  padding-bottom: 0.3em;
+}
+
+.md-typeset h2 {
+  color: var(--terminal-green-bright); 
+}
+
+.md-typeset h3 {
+  color: var(--terminal-green); 
+}
+
+.md-typeset h4, .md-typeset h5, .md-typeset h6 {
+  color: var(--terminal-green-dim); 
+}
+
+
+.md-typeset h1::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: var(--terminal-green);
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+.md-nav__item .md-nav__link[href*="index.md"],
+.md-nav__item .md-nav__link:contains("Overview") {
+  color: #ffffff; 
+  font-weight: bold;
+  border-left: 3px solid var(--terminal-green);
+  padding-left: 6px;
+}
+
+
+.md-nav__item .md-nav__link[href*="index.md"]:hover,
+.md-nav__item .md-nav__link:contains("Overview"):hover {
+  color: var(--terminal-green-bright); 
+  text-decoration: underline;
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link {
+  color: var(--terminal-green-bright) !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--terminal-green-dark);
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__link {
+  color: var(--terminal-green) !important; 
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  padding-right: 15px; 
+}
+
+
+.md-nav--primary > .md-nav__list > .md_nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav > .md-nav__list > .md-nav__item--nested > .md-nav__link {
+  font-size: 0.8em;
+  padding-right: 15px; 
+}
+
+
+.md-nav__item .md-nav .md-nav__item {
+  font-size: 0.85em;
+}
+
+
+.md-nav__item .md-nav .md-nav .md-nav__item {
+  font-size: 0.8em;
+  margin-left: 8px;
+}
+
+
+.md-nav__item--nested {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+
+.md-typeset table {
+  border: 1px solid var(--terminal-green-dark);
+}
+
+.md-typeset table th {
+  background-color: #111111;
+  color: var(--terminal-green);
+  border-bottom: 2px solid var(--terminal-green-dark);
+}
+
+.md-typeset table tr:hover {
+  background-color: rgba(0, 255, 0, 0.05);
+}
+
+
+.md-typeset blockquote {
+  border-left: 4px solid var(--terminal-green-dark);
+  background-color: rgba(0, 255, 0, 0.05);
+}
+
+
+.md-typeset .admonition {
+  border-left: 4px solid var(--terminal-green);
+  background-color: rgba(0, 255, 0, 0.05);
+}
+
+.md-typeset .admonition-title {
+  background-color: rgba(0, 255, 0, 0.1);
+  color: var(--terminal-green-bright);
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
