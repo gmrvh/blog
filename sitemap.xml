@@ -61,6 +61,14 @@
          <lastmod>2025-08-04</lastmod>
     </url>
     <url>
+         <loc>https://gmrvh.github.io/ctf-writeups/informative/stealth-in-memory-loading/</loc>
+         <lastmod>2025-08-04</lastmod>
+    </url>
+    <url>
+         <loc>https://gmrvh.github.io/ctf-writeups/overview/</loc>
+         <lastmod>2025-08-04</lastmod>
+    </url>
+    <url>
          <loc>https://gmrvh.github.io/ctf-writeups/pg/</loc>
          <lastmod>2025-08-04</lastmod>
     </url>
@@ -106,10 +114,6 @@
     </url>
     <url>
          <loc>https://gmrvh.github.io/ctf-writeups/pg/zipper/</loc>
-         <lastmod>2025-08-04</lastmod>
-    </url>
-    <url>
-         <loc>https://gmrvh.github.io/ctf-writeups/web/</loc>
          <lastmod>2025-08-04</lastmod>
     </url>
 </urlset>

